@@ -1,14 +1,10 @@
 import { ChangeDetectionStrategy, Component } from '@angular/core';
-import {HeaderComponent} from '../../shared/components/header/header.component';
+import { HeaderComponent } from '../../shared/components/header/header.component';
 
 @Component({
   selector: 'app-offer',
-  imports: [
-    HeaderComponent
-  ],
+  imports: [HeaderComponent],
   templateUrl: './offer.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class OfferComponent {
-
-}
+export class OfferComponent {}

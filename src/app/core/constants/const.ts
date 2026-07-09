@@ -1,4 +1,4 @@
-import {City} from '../models/city';
+import { City } from '../models/city';
 
 export enum AppRoute {
   MAIN = '',
@@ -35,12 +35,7 @@ export enum CityName {
 }
 
 export type CityLoc =
-  | 'paris'
-  | 'cologne'
-  | 'brussels'
-  | 'amsterdam'
-  | 'hamburg'
-  | 'dusseldorf';
+  'paris' | 'cologne' | 'brussels' | 'amsterdam' | 'hamburg' | 'dusseldorf';
 
 export const CITY_LOCATIONS: City[] = [
   {
