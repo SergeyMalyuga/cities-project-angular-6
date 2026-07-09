@@ -1,0 +1,15 @@
+.not-found-img {
+  display: block;
+  margin: 0 auto;
+}
+
+.not-found-text {
+  text-align: center;
+}
+
+.not-found-link {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  font-size: 25px;
+}
