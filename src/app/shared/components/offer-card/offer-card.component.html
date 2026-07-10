@@ -1,4 +1,4 @@
-<article class="cities__card place-card">
+<article appHoverTracker [enable]="isHoverTrackerEnable" (hovered)="onHovered($event)" class="cities__card place-card">
   <div class="cities__image-wrapper place-card__image-wrapper">
     <a href="#">
       <img
