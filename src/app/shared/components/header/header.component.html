@@ -18,16 +18,21 @@
             <li class="header__nav-item user">
               <a class="header__nav-link header__nav-link--profile" href="#">
                 <div class="header__avatar-wrapper user__avatar-wrapper"></div>
-                <span class="header__user-name user__name"
-                >{{ userEmail() }}</span
-                >
+                <span class="header__user-name user__name">{{
+                  userEmail()
+                }}</span>
                 <span class="header__favorite-count">3</span>
               </a>
             </li>
           }
           <li class="header__nav-item">
-            <a class="header__nav-link" [routerLink]="isAuth(authStatus()) ? null : ['/', AppRoute.LOGIN]">
-              <span class="header__signout">{{isAuth(authStatus()) ? 'Sign out' : 'Login'}}</span>
+            <a
+              class="header__nav-link"
+              [routerLink]="isAuth(authStatus()) ? null : ['/', AppRoute.LOGIN]"
+            >
+              <span class="header__signout">{{
+                isAuth(authStatus()) ? "Sign out" : "Login"
+              }}</span>
             </a>
           </li>
         </ul>

@@ -1,16 +1,17 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/models/app.state';
-import {selectAuthStatus, selectEmail} from '../../../store/user/selectors/user.selectors';
-import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../../core/constants/const';
-import {isAuth} from '../../../core/utils/auth-status';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/models/app.state';
+import {
+  selectAuthStatus,
+  selectEmail,
+} from '../../../store/user/selectors/user.selectors';
+import { RouterLink } from '@angular/router';
+import { AppRoute } from '../../../core/constants/const';
+import { isAuth } from '../../../core/utils/auth-status';
 
 @Component({
   selector: 'app-header',
-  imports: [
-    RouterLink
-  ],
+  imports: [RouterLink],
   templateUrl: './header.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

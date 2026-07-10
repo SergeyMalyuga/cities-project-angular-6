@@ -1,5 +1,5 @@
 <div class="page page--gray page--main">
-  <app-header/>
+  <app-header />
   <main class="page__main page__main--index">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
@@ -8,14 +8,15 @@
           @for (city of CITY_LOCATIONS; track city) {
             <li class="locations__item">
               <a
-                 [ngClass]="{
-                 'locations__item-link': true,
-                 'tabs__item': true,
-                 'tabs__item--active': currentCity().name === city.name
-                 }"
-                 (click)="changeCity(city)"
-                 href="#">
-                <span>{{city.name}}</span>
+                [ngClass]="{
+                  'locations__item-link': true,
+                  tabs__item: true,
+                  'tabs__item--active': currentCity().name === city.name,
+                }"
+                (click)="changeCity(city)"
+                href="#"
+              >
+                <span>{{ city.name }}</span>
               </a>
             </li>
           }
@@ -26,7 +27,9 @@
       <div class="cities__places-container container">
         <section class="cities__places places">
           <h2 class="visually-hidden">Places</h2>
-          <b class="places__found">{{offers().length}} places to stay in {{currentCity().name}}</b>
+          <b class="places__found"
+            >{{ offers().length }} places to stay in {{ currentCity().name }}</b
+          >
           <form class="places__sorting" action="#" method="get">
             <span class="places__sorting-caption">Sort by</span>
             <span class="places__sorting-type" tabindex="0">
@@ -48,7 +51,7 @@
           </form>
           <div class="cities__places-list places__list tabs__content">
             @for (offer of offers(); track offer.id) {
-              <app-offer-card [offer]="offer"/>
+              <app-offer-card [offer]="offer" />
             }
           </div>
         </section>
