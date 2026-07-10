@@ -30,27 +30,9 @@
           <b class="places__found"
           >{{ offers().length }} places to stay in {{ currentCity().name }}</b
           >
-          <form class="places__sorting" action="#" method="get">
-            <span class="places__sorting-caption">Sort by</span>
-            <span class="places__sorting-type" tabindex="0">
-              Popular
-              <svg class="places__sorting-arrow" width="7" height="4">
-                <use xlink:href="#icon-arrow-select"></use>
-              </svg>
-            </span>
-            <ul
-              class="places__options places__options--custom places__options--opened"
-            >
-              <li class="places__option places__option--active" tabindex="0">
-                Popular
-              </li>
-              <li class="places__option" tabindex="0">Price: low to high</li>
-              <li class="places__option" tabindex="0">Price: high to low</li>
-              <li class="places__option" tabindex="0">Top rated first</li>
-            </ul>
-          </form>
+          <app-places-sorting-form [currentSortType]="currentSortType()" (clicked)="changeSortType($event)"/>
           <div class="cities__places-list places__list tabs__content">
-            @for (offer of offers(); track offer.id) {
+            @for (offer of offers() | sortBy: currentSortType(); track offer.id) {
               <app-offer-card [offer]="offer" [isHoverTrackerEnable]="true" (hovered)="changeActiveCard($event)"/>
             }
           </div>
