@@ -10,6 +10,7 @@ import { provideStore } from '@ngrx/store';
 import { appReducer } from './store/app/app.reducer';
 import { provideEffects } from '@ngrx/effects';
 import { OfferEffects } from './store/offer/effects/offer.effects';
+import {UserEffects} from './store/user/effects/user.effects';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -17,6 +18,6 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(withInterceptorsFromDi()),
     provideStore(appReducer),
-    provideEffects(OfferEffects),
+    provideEffects(OfferEffects, UserEffects),
   ],
 };
