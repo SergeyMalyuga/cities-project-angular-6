@@ -9,10 +9,11 @@ import {NgClass} from '@angular/common';
 import {City} from '../../core/models/city';
 import {changeCity} from '../../store/city/actions/city.actions';
 import {OfferPreview} from '../../core/models/offers';
+import {MapComponent} from '../../shared/components/map/map.component';
 
 @Component({
   selector: 'app-main',
-  imports: [HeaderComponent, OfferCardComponent, NgClass],
+  imports: [HeaderComponent, OfferCardComponent, NgClass, MapComponent],
   templateUrl: './main.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })

@@ -56,7 +56,9 @@
           </div>
         </section>
         <div class="cities__right-section">
-          <section class="cities__map map"></section>
+          <section class="cities__map map">
+            <app-map [offers]="offers()" [activeCard]="activeCard()"/>
+          </section>
         </div>
       </div>
     </div>
