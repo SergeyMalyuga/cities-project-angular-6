@@ -7,6 +7,5 @@ export interface AppState {
   offer: OfferState;
   currentCity: City;
   user: UserState;
-  /*
-  favoriteOffer: FavoriteOfferState;*/
+  favoriteOffer: FavoriteOfferState;
 }
