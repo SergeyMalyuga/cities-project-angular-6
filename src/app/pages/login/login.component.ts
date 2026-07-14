@@ -6,7 +6,7 @@ import {AppState} from '../../core/models/app.state';
 import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
 import {first} from 'rxjs';
 import {AppRoute, AuthorizationStatus, CITY_LOCATIONS} from '../../core/constants/const';
-import {Router} from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 import {loadOffers} from '../../store/offer/actions/offer.actions';
 import {login} from '../../store/user/actions/user.actions';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
@@ -15,7 +15,8 @@ import {changeCity} from '../../store/city/actions/city.actions';
 @Component({
   selector: 'app-login',
   imports: [
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    RouterLink
   ],
   templateUrl: './login.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -68,4 +69,6 @@ export class LoginComponent implements OnInit {
         this.router.navigate([AppRoute.MAIN]);
       })
   }
+
+  protected readonly AppRoute = AppRoute;
 }
