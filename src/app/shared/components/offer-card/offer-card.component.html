@@ -17,7 +17,13 @@
         <span class="place-card__price-text">&#47;&nbsp;night</span>
       </div>
       <button
-        class="place-card__bookmark-button place-card__bookmark-button--active button"
+        (click)="toggleFavoriteStatus()"
+        [ngClass]="{
+        'place-card__bookmark-button': true,
+        'place-card__bookmark-button--active': isEnableActiveMark(),
+        'button': true
+        }"
+        [disabled]="isFavoriteOffersIsLoading()"
         type="button"
       >
         <svg class="place-card__bookmark-icon" width="18" height="19">
