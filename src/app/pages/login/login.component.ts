@@ -11,6 +11,7 @@ import {loadOffers} from '../../store/offer/actions/offer.actions';
 import {login} from '../../store/user/actions/user.actions';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
 import {changeCity} from '../../store/city/actions/city.actions';
+import {loadFavoriteOffers} from '../../store/favorite-offer/actions/favorite-offer.actions';
 
 @Component({
   selector: 'app-login',
@@ -26,6 +27,8 @@ export class LoginComponent implements OnInit {
   private router = inject(Router);
   private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
+
+  protected readonly AppRoute = AppRoute;
 
   public randomCity = this.getRandomCity();
   public loginForm: FormGroup = this.fb.group({
@@ -65,10 +68,9 @@ export class LoginComponent implements OnInit {
       takeUntilDestroyed(this.destroyRef))
       .subscribe(() => {
         this.store.dispatch(loadOffers());
+        this.store.dispatch(loadFavoriteOffers());
         this.loginForm.reset();
         this.router.navigate([AppRoute.MAIN]);
       })
   }
-
-  protected readonly AppRoute = AppRoute;
 }
