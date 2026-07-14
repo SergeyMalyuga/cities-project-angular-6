@@ -17,6 +17,6 @@ export class FavoriteOfferService {
 
   public toggleFavorite(offerId: string, isFavorite: boolean): Observable<Offer> {
     const status = isFavorite ? FavoriteStatus.ADDED : FavoriteStatus.REMOVED;
-    return this.http.post<Offer>(`${BASE_URL}/${APIRoute.FAVORITE}/${offerId}${status}`, {}).pipe(...getDefaultHttpPipes<Offer>());
+    return this.http.post<Offer>(`${BASE_URL}/${APIRoute.FAVORITE}/${offerId}/${status}`, {}).pipe(...getDefaultHttpPipes<Offer>());
   }
 }
