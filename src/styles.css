@@ -1,2 +1,11 @@
 /* You can add global styles to this file, and also import other style files */
 @import "leaflet/dist/leaflet.css";
+
+.error {
+  position: absolute;
+  bottom: 3px;
+  left: 0;
+  width: 100%;
+  background-color: #f1724f;
+  text-align: center;
+}
