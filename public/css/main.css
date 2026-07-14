@@ -1701,6 +1701,7 @@ img {
   width: 341px;
 }
 .login__input-wrapper {
+  position: relative;
   margin-right: 2px;
 }
 .login__input {
