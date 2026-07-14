@@ -5,11 +5,12 @@ import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
 import {selectAuthStatus} from '../../store/user/selectors/user.selectors';
 import {first} from 'rxjs';
-import {AppRoute, AuthorizationStatus} from '../../core/constants/const';
+import {AppRoute, AuthorizationStatus, CITY_LOCATIONS} from '../../core/constants/const';
 import {Router} from '@angular/router';
 import {loadOffers} from '../../store/offer/actions/offer.actions';
 import {login} from '../../store/user/actions/user.actions';
 import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {changeCity} from '../../store/city/actions/city.actions';
 
 @Component({
   selector: 'app-login',
@@ -25,6 +26,7 @@ export class LoginComponent implements OnInit {
   private destroyRef = inject(DestroyRef);
   private fb = inject(FormBuilder);
 
+  public randomCity = this.getRandomCity();
   public loginForm: FormGroup = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.pattern('^(?=.*[A-Za-z])(?=.*\\d)[A-Za-z\\d]+$')]],
@@ -44,6 +46,16 @@ export class LoginComponent implements OnInit {
       const credentials: Credentials = {email, password};
       this.store.dispatch(login({credentials}));
     }
+  }
+
+  public changeCity() {
+    this.store.dispatch(changeCity({city: this.randomCity}));
+    this.router.navigate([AppRoute.MAIN]);
+  }
+
+  private getRandomCity() {
+    const index = Math.floor(Math.random() * CITY_LOCATIONS.length);
+    return CITY_LOCATIONS[index];
   }
 
   public ngOnInit(): void {
