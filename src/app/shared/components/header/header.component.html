@@ -28,6 +28,7 @@
           <li class="header__nav-item">
             <a
               class="header__nav-link"
+              (click)="logout()"
               [routerLink]="isAuth(authStatus()) ? null : ['/', AppRoute.LOGIN]"
             >
               <span class="header__signout">{{
