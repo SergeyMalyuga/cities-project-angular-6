@@ -1,4 +1,4 @@
-import {createFeatureSelector} from '@ngrx/store';
+import {createFeatureSelector, createSelector} from '@ngrx/store';
 import {AppState} from '../../../core/models/app.state';
 import {favoriteOfferAdapter} from '../favorite-offer.reducer';
 
@@ -7,3 +7,11 @@ const favoriteOffersSelectors = favoriteOfferAdapter.getSelectors(selectFavorite
 
 export const selectFavoriteOffers = favoriteOffersSelectors.selectAll;
 export const selectFavoriteOffersTotal = favoriteOffersSelectors.selectTotal;
+export const selectToggleStatus = createSelector(
+  selectFavoriteOffersState,
+  state => state.success
+);
+export const selectIsFavoriteOffersLoading = createSelector(
+  selectFavoriteOffersState,
+  state => state.isLoading
+);
