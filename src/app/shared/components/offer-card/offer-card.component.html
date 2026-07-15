@@ -23,7 +23,7 @@
         'place-card__bookmark-button--active': isEnableActiveMark(offer, authStatus()),
         'button': true
         }"
-        [disabled]="isFavoriteOffersIsLoading()"
+        [disabled]="isDisabled ?? isFavoriteOffersIsLoading()"
         type="button"
       >
         <svg class="place-card__bookmark-icon" width="18" height="19">
