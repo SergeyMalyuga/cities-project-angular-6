@@ -20,7 +20,7 @@
         (click)="toggleFavoriteStatus()"
         [ngClass]="{
         'place-card__bookmark-button': true,
-        'place-card__bookmark-button--active': isEnableActiveMark(),
+        'place-card__bookmark-button--active': isEnableActiveMark(offer, authStatus()),
         'button': true
         }"
         [disabled]="isFavoriteOffersIsLoading()"

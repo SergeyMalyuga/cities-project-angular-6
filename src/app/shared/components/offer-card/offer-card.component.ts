@@ -10,6 +10,7 @@ import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
 import {OfferService} from '../../../core/services/offer.service';
 import {selectIsFavoriteOffersLoading} from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
 import {RouterLink} from '@angular/router';
+import {isEnableActiveMark} from '../../../core/utils/enable-active-mark';
 
 @Component({
   selector: 'app-offer-card',
@@ -25,6 +26,9 @@ export class OfferCardComponent {
   private store = inject(Store<AppState>);
   private offerService = inject(OfferService);
 
+  protected readonly AppRoute = AppRoute;
+  protected readonly isEnableActiveMark = isEnableActiveMark;
+
   public authStatus = this.store.selectSignal(selectAuthStatus);
   public isFavoriteOffersIsLoading = this.store.selectSignal(selectIsFavoriteOffersLoading);
 
@@ -38,13 +42,7 @@ export class OfferCardComponent {
     }
   }
 
-  public isEnableActiveMark() {
-    return this.offer.isFavorite && this.authStatus() === AuthorizationStatus.AUTH;
-  }
-
   public toggleFavoriteStatus() {
     this.offerService.toggleFavorite(this.offer.id, !this.offer.isFavorite);
   }
-
-  protected readonly AppRoute = AppRoute;
 }
