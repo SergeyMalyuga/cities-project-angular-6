@@ -12,6 +12,7 @@ export const routes: Routes = [
   {
     path: AppRoute.FAVORITES,
     title: 'Favorites',
+    canActivate: [AuthGuard],
     loadComponent: () =>
       import('./pages/favorites/favorites.component').then(
         (m) => m.FavoritesComponent,
@@ -20,7 +21,6 @@ export const routes: Routes = [
   {
     path: `${AppRoute.OFFER}/:id`,
     title: 'Offer',
-    canActivate: [AuthGuard],
     loadComponent: () =>
       import('./pages/offer/offer.component').then((m) => m.OfferComponent),
   },
