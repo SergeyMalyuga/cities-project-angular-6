@@ -5,8 +5,8 @@ import {Offer, OfferPreview} from '../../core/models/offers';
 import {catchError, combineLatest, EMPTY, filter, map, merge, of, Subject, switchMap, tap} from 'rxjs';
 import {Comment} from '../../core/models/comments';
 import {OfferDataService} from '../../core/services/offer-data.service';
-import {AppRoute} from '../../core/constants/const';
-import {DatePipe, NgClass, TitleCasePipe} from '@angular/common';
+import {AppRoute, QUANTITY_FIRST_OFFERS} from '../../core/constants/const';
+import {DatePipe, NgClass, SlicePipe, TitleCasePipe} from '@angular/common';
 import {isEnableActiveMark} from '../../core/utils/enable-active-mark';
 import {Store} from '@ngrx/store';
 import {AppState} from '../../core/models/app.state';
@@ -18,10 +18,13 @@ import {CommentService} from '../../core/services/comment.service';
 import {CommentFormComponent} from '../../components/comment-form/comment-form.component';
 import {SortByDatePipe} from './pipes/sort-by-date';
 import {isAuth} from '../../core/utils/auth-status';
+import {MapComponent} from '../../shared/components/map/map.component';
+import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
+import {ScrollUpDirective} from '../../shared/directives/scroll-up.directive';
 
 @Component({
   selector: 'app-offer',
-  imports: [HeaderComponent, NgClass, TitleCasePipe, DatePipe, CommentFormComponent, SortByDatePipe, SortByDatePipe],
+  imports: [HeaderComponent, NgClass, TitleCasePipe, DatePipe, CommentFormComponent, SortByDatePipe, SortByDatePipe, MapComponent, SlicePipe, OfferCardComponent, ScrollUpDirective],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -39,16 +42,18 @@ export class OfferComponent implements OnInit {
 
   protected readonly isEnableActiveMark = isEnableActiveMark;
   protected readonly getRatingWidth = getRatingWidth;
+  protected readonly isAuth = isAuth;
+  protected readonly QUANTITY_FIRST_OFFERS = QUANTITY_FIRST_OFFERS;
 
   public offer = signal<Offer | null>(null);
   public comments = signal<Comment[]>([]);
   public nearbyOffers = signal<OfferPreview[]>([]);
   public authStatus = this.store.selectSignal(selectAuthStatus);
   public isToggleStatus = signal<boolean>(false);
+  public isNearbyOffersLoading = signal<boolean>(false);
   public readonly bedrooms = computed(() => this.offer()?.bedrooms ?? 0);
   public readonly maxAdults = computed(() => this.offer()?.maxAdults ?? 0);
   public readonly offerId = computed(() => this.offer()?.id ?? null);
-  protected readonly isAuth = isAuth;
 
   ngOnInit(): void {
     this.activatedRouter.paramMap.pipe(map(params => params.get('id')),
@@ -85,6 +90,7 @@ export class OfferComponent implements OnInit {
       this.nearbyOffers.set(result.nearbyOffers);
       this.comments.set(result.comments);
       this.isToggleStatus.set(false);
+      this.isNearbyOffersLoading.set(false);
     })
   }
 
@@ -112,5 +118,10 @@ export class OfferComponent implements OnInit {
 
   public refreshComments() {
     this.refreshComments$.next();
+  }
+
+  public refreshNearbyOffers() {
+    this.isNearbyOffersLoading.set(true);
+    this.refreshNearbyOffers$.next();
   }
 }
