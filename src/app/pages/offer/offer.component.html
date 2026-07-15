@@ -1,59 +1,35 @@
 <div class="page">
-  <app-header />
+  <app-header/>
   <main class="page__main page__main--offer">
     <section class="offer">
       <div class="offer__gallery-container container">
         <div class="offer__gallery">
-          <div class="offer__image-wrapper">
-            <img class="offer__image" src="img/room.jpg" alt="Photo studio" />
-          </div>
-          <div class="offer__image-wrapper">
-            <img
-              class="offer__image"
-              src="img/apartment-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div class="offer__image-wrapper">
-            <img
-              class="offer__image"
-              src="img/apartment-02.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div class="offer__image-wrapper">
-            <img
-              class="offer__image"
-              src="img/apartment-03.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div class="offer__image-wrapper">
-            <img
-              class="offer__image"
-              src="img/studio-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
-          <div class="offer__image-wrapper">
-            <img
-              class="offer__image"
-              src="img/apartment-01.jpg"
-              alt="Photo studio"
-            />
-          </div>
+          @for (image of offer()?.images; track image) {
+            <div class="offer__image-wrapper">
+              <img class="offer__image" src="{{image}}" alt="Photo studio"/>
+            </div>
+          }
         </div>
       </div>
       <div class="offer__container container">
         <div class="offer__wrapper">
-          <div class="offer__mark">
-            <span>Premium</span>
-          </div>
+          @if (offer()?.isPremium) {
+            <div class="offer__mark">
+              <span>Premium</span>
+            </div>
+          }
           <div class="offer__name-wrapper">
             <h1 class="offer__name">
-              Beautiful &amp; luxurious studio at great location
+              {{ offer()?.title }}
             </h1>
-            <button class="offer__bookmark-button button" type="button">
+            <button (click)="toggleFavoriteStatus()"
+                    [ngClass]="{
+                    'offer__bookmark-button': true,
+                    'button': true,
+                    'offer__bookmark-button--active': isEnableActiveMark(offer(), authStatus())
+                    }"
+                    type="button"
+                    [disabled]="isToggleStatus()">
               <svg class="offer__bookmark-icon" width="31" height="33">
                 <use xlink:href="#icon-bookmark"></use>
               </svg>
@@ -62,33 +38,30 @@
           </div>
           <div class="offer__rating rating">
             <div class="offer__stars rating__stars">
-              <span style="width: 80%"></span>
+              <span [style.width.%]="getRatingWidth(offer()?.rating ?? 0)"></span>
               <span class="visually-hidden">Rating</span>
             </div>
-            <span class="offer__rating-value rating__value">4.8</span>
+            <span class="offer__rating-value rating__value">{{ offer()?.rating }}</span>
           </div>
           <ul class="offer__features">
-            <li class="offer__feature offer__feature--entire">Apartment</li>
-            <li class="offer__feature offer__feature--bedrooms">3 Bedrooms</li>
-            <li class="offer__feature offer__feature--adults">Max 4 adults</li>
+            <li class="offer__feature offer__feature--entire">{{ offer()?.type | titlecase }}</li>
+            <li
+              class="offer__feature offer__feature--bedrooms">{{ bedrooms() }} {{ bedrooms() > 1 ? 'Bedrooms' : 'Bedroom' }}
+            </li>
+            <li class="offer__feature offer__feature--adults">
+              Max {{ maxAdults() }} {{ maxAdults() > 1 ? 'adults' : 'adult' }}
+            </li>
           </ul>
           <div class="offer__price">
-            <b class="offer__price-value">&euro;120</b>
+            <b class="offer__price-value">&euro;{{ offer()?.price }}</b>
             <span class="offer__price-text">&nbsp;night</span>
           </div>
           <div class="offer__inside">
             <h2 class="offer__inside-title">What&apos;s inside</h2>
             <ul class="offer__inside-list">
-              <li class="offer__inside-item">Wi-Fi</li>
-              <li class="offer__inside-item">Washing machine</li>
-              <li class="offer__inside-item">Towels</li>
-              <li class="offer__inside-item">Heating</li>
-              <li class="offer__inside-item">Coffee machine</li>
-              <li class="offer__inside-item">Baby seat</li>
-              <li class="offer__inside-item">Kitchen</li>
-              <li class="offer__inside-item">Dishwasher</li>
-              <li class="offer__inside-item">Cabel TV</li>
-              <li class="offer__inside-item">Fridge</li>
+              @for (good of offer()?.goods; track good) {
+                <li class="offer__inside-item">{{ good }}</li>
+              }
             </ul>
           </div>
           <div class="offer__host">
@@ -99,25 +72,20 @@
               >
                 <img
                   class="offer__avatar user__avatar"
-                  src="img/avatar-angelina.jpg"
+                  src="{{offer()?.host?.avatarUrl}}"
                   width="74"
                   height="74"
                   alt="Host avatar"
                 />
               </div>
-              <span class="offer__user-name"> Angelina </span>
-              <span class="offer__user-status"> Pro </span>
+              <span class="offer__user-name"> {{ offer()?.host?.name }} </span>
+              @if (offer()?.host?.isPro) {
+                <span class="offer__user-status"> Pro </span>
+              }
             </div>
             <div class="offer__description">
               <p class="offer__text">
-                A quiet cozy and picturesque that hides behind a a river by the
-                unique lightness of Amsterdam. The building is green and from
-                18th century.
-              </p>
-              <p class="offer__text">
-                An independent House, strategically located between Rembrand
-                Square and National Opera, but where the bustle of the city
-                comes to rest in this alley flowery and colorful.
+               {{offer()?.description}}
               </p>
             </div>
           </div>
@@ -152,14 +120,15 @@
                     from 18th century.
                   </p>
                   <time class="reviews__time" datetime="2019-04-24"
-                    >April 2019</time
+                  >April 2019
+                  </time
                   >
                 </div>
               </li>
             </ul>
             <form class="reviews__form form" action="#" method="post">
               <label class="reviews__label form__label" for="review"
-                >Your review</label
+              >Your review</label
               >
               <div class="reviews__rating-form form__rating">
                 <input
