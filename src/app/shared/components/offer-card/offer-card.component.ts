@@ -6,13 +6,14 @@ import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
 import {AppState} from '../../../core/models/app.state';
 import {Store} from '@ngrx/store';
 import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
-import {AuthorizationStatus} from '../../../core/constants/const';
+import {AppRoute, AuthorizationStatus} from '../../../core/constants/const';
 import {OfferService} from '../../../core/services/offer.service';
 import {selectIsFavoriteOffersLoading} from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
+import {RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-offer-card',
-  imports: [TitleCasePipe, HoverTrackerDirective, NgClass],
+  imports: [TitleCasePipe, HoverTrackerDirective, NgClass, RouterLink],
   templateUrl: './offer-card.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -44,4 +45,6 @@ export class OfferCardComponent {
   public toggleFavoriteStatus() {
     this.offerService.toggleFavorite(this.offer.id, !this.offer.isFavorite);
   }
+
+  protected readonly AppRoute = AppRoute;
 }
