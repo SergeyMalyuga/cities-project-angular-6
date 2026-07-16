@@ -24,6 +24,7 @@ export class OfferCardComponent {
   @Input({required: true}) offer!: OfferPreview;
   @Input() isHoverTrackerEnable = false;
   @Input() isDisabled: boolean | null = null;
+  @Input() isFavoritePage = false;
   @Output() hovered = new EventEmitter<OfferPreview | null>();
   @Output() toggled = new EventEmitter<void>();
 
