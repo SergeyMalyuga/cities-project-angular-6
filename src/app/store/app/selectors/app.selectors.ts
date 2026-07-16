@@ -22,3 +22,8 @@ export const selectOffersByCity = createSelector(
       },
     ),
 );
+
+export const selectIsOffersLoading = createSelector(
+  selectOfferState,
+  state => state.isLoading
+);
