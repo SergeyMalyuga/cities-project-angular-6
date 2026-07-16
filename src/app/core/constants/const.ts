@@ -1,4 +1,4 @@
-import {City} from '../models/city';
+import { City } from '../models/city';
 
 export enum AppRoute {
   MAIN = '',

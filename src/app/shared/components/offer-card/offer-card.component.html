@@ -1,9 +1,13 @@
-<article appHoverTracker [enable]="isHoverTrackerEnable" (hovered)="onHovered($event)"
-         [ngClass]="{
-'cities__card': !isFavoritePage,
-'favorites__card': isFavoritePage,
-'place-card': true
-}">
+<article
+  appHoverTracker
+  [enable]="isHoverTrackerEnable"
+  (hovered)="onHovered($event)"
+  [ngClass]="{
+    cities__card: !isFavoritePage,
+    favorites__card: isFavoritePage,
+    'place-card': true,
+  }"
+>
   @if (offer.isPremium) {
     <div class="place-card__mark">
       <span>Premium</span>
@@ -11,10 +15,11 @@
   }
   <div
     [ngClass]="{
-  'cities__image-wrapper': !isFavoritePage,
-  'favorites__image-wrapper': isFavoritePage,
-  'place-card__image-wrapper': true
-  }">
+      'cities__image-wrapper': !isFavoritePage,
+      'favorites__image-wrapper': isFavoritePage,
+      'place-card__image-wrapper': true,
+    }"
+  >
     <a [routerLink]="['/', AppRoute.OFFER, offer.id]">
       <img
         class="place-card__image"
@@ -25,11 +30,13 @@
       />
     </a>
   </div>
-  <div class="place-card__info"
-  [ngClass]="{
-  'favorites__card-info': isFavoritePage,
-  'place-card__info': true
-  }">
+  <div
+    class="place-card__info"
+    [ngClass]="{
+      'favorites__card-info': isFavoritePage,
+      'place-card__info': true,
+    }"
+  >
     <div class="place-card__price-wrapper">
       <div class="place-card__price">
         <b class="place-card__price-value">&euro;{{ offer.price }}</b>
@@ -38,9 +45,12 @@
       <button
         (click)="toggleFavoriteStatus()"
         [ngClass]="{
-        'place-card__bookmark-button': true,
-        'place-card__bookmark-button--active': isEnableActiveMark(offer, authStatus()),
-        'button': true
+          'place-card__bookmark-button': true,
+          'place-card__bookmark-button--active': isEnableActiveMark(
+            offer,
+            authStatus()
+          ),
+          button: true,
         }"
         [disabled]="isDisabled ?? isFavoriteOffersIsLoading()"
         type="button"

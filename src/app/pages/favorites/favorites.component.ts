@@ -1,14 +1,19 @@
-import {ChangeDetectionStrategy, Component, computed, inject} from '@angular/core';
-import {HeaderComponent} from '../../shared/components/header/header.component';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../core/models/app.state';
-import {OffersByCity} from '../../core/types/offers-by-city.type';
-import {AppRoute, CITIES} from '../../core/constants/const';
-import {selectFavoriteOffers} from '../../store/favorite-offer/selectors/favorite-offers.selectors';
-import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
-import {CityName} from '../../core/types/city-name.type';
-import {NgClass} from '@angular/common';
-import {RouterLink} from '@angular/router';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  inject,
+} from '@angular/core';
+import { HeaderComponent } from '../../shared/components/header/header.component';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../core/models/app.state';
+import { OffersByCity } from '../../core/types/offers-by-city.type';
+import { AppRoute, CITIES } from '../../core/constants/const';
+import { selectFavoriteOffers } from '../../store/favorite-offer/selectors/favorite-offers.selectors';
+import { OfferCardComponent } from '../../shared/components/offer-card/offer-card.component';
+import { CityName } from '../../core/types/city-name.type';
+import { NgClass } from '@angular/common';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-favorites',
@@ -28,10 +33,10 @@ export class FavoritesComponent {
   public offers = computed<OffersByCity>(() => {
     const offersByCity = this.createEmptyOffersByCity();
     const offers = this.favoriteOffers();
-    offers.forEach(offer => {
+    offers.forEach((offer) => {
       const key = offer.city.name;
       if (this.isKeyOfOffersByCity(key)) {
-        offersByCity[key].push(offer)
+        offersByCity[key].push(offer);
       }
     });
     return offersByCity;
@@ -40,7 +45,7 @@ export class FavoritesComponent {
   private createEmptyOffersByCity(): OffersByCity {
     return CITIES.reduce((acc, city) => {
       acc[city] = [];
-      return acc
+      return acc;
     }, {} as OffersByCity);
   }
 

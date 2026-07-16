@@ -1,6 +1,6 @@
-import {Component} from '@angular/core';
-import {RouterLink} from '@angular/router';
-import {AppRoute} from '../../core/constants/const';
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { AppRoute } from '../../core/constants/const';
 
 @Component({
   selector: 'app-404',

@@ -24,7 +24,7 @@
 }
 
 .loader::after {
-  content: '';
+  content: "";
   position: absolute;
   left: 0;
   top: -50%;
@@ -38,7 +38,7 @@
 }
 
 .loader::before {
-  content: '';
+  content: "";
   position: absolute;
   left: calc(20 * var(--size));
   bottom: calc(15 * var(--size));

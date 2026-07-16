@@ -1,12 +1,15 @@
-import {ChangeDetectionStrategy, Component, inject} from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/models/app.state';
-import {selectAuthStatus, selectEmail,} from '../../../store/user/selectors/user.selectors';
-import {Router, RouterLink} from '@angular/router';
-import {AppRoute} from '../../../core/constants/const';
-import {isAuth} from '../../../core/utils/auth-status';
-import {logout} from '../../../store/user/actions/user.actions';
-import {selectFavoriteOffersTotal} from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/models/app.state';
+import {
+  selectAuthStatus,
+  selectEmail,
+} from '../../../store/user/selectors/user.selectors';
+import { Router, RouterLink } from '@angular/router';
+import { AppRoute } from '../../../core/constants/const';
+import { isAuth } from '../../../core/utils/auth-status';
+import { logout } from '../../../store/user/actions/user.actions';
+import { selectFavoriteOffersTotal } from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
 
 @Component({
   selector: 'app-header',

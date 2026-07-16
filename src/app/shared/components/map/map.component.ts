@@ -6,12 +6,12 @@ import {
   Input,
   OnChanges,
   OnInit,
-  SimpleChanges
+  SimpleChanges,
 } from '@angular/core';
-import {Store} from '@ngrx/store';
-import {AppState} from '../../../core/models/app.state';
-import {selectCurrentCity} from '../../../store/app/selectors/app.selectors';
-import {OfferPreview} from '../../../core/models/offers';
+import { Store } from '@ngrx/store';
+import { AppState } from '../../../core/models/app.state';
+import { selectCurrentCity } from '../../../store/app/selectors/app.selectors';
+import { OfferPreview } from '../../../core/models/offers';
 import * as L from 'leaflet';
 
 @Component({
@@ -19,11 +19,11 @@ import * as L from 'leaflet';
   imports: [],
   templateUrl: './map.component.html',
   styleUrl: './map.component.css',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class MapComponent implements OnInit, AfterViewInit, OnChanges {
-  @Input({required: true}) offers!: OfferPreview[];
-  @Input({required: true}) activeCard!: OfferPreview | null;
+  @Input({ required: true }) offers!: OfferPreview[];
+  @Input({ required: true }) activeCard!: OfferPreview | null;
   private store = inject(Store<AppState>);
   private currentCity = this.store.selectSignal(selectCurrentCity);
   private map!: L.Map;
@@ -43,14 +43,17 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
   });
 
   public ngOnInit(): void {
-    this.center = [this.currentCity().location.latitude, this.currentCity().location.longitude];
+    this.center = [
+      this.currentCity().location.latitude,
+      this.currentCity().location.longitude,
+    ];
   }
 
   public ngAfterViewInit(): void {
     this.map = new L.Map('map', {
       center: this.center,
       zoomControl: false,
-      zoom: 13
+      zoom: 13,
     });
 
     const tiles = L.tileLayer(
@@ -73,24 +76,42 @@ export class MapComponent implements OnInit, AfterViewInit, OnChanges {
     if (!this.map) return;
     if (changes['offers']) {
       this.refreshMarkers();
-      this.map.setView([this.currentCity().location.latitude, this.currentCity().location.longitude], 13, {animate: true});
+      this.map.setView(
+        [
+          this.currentCity().location.latitude,
+          this.currentCity().location.longitude,
+        ],
+        13,
+        { animate: true },
+      );
     } else if (changes['activeCard']) {
       this.refreshMarkers();
     }
   }
 
   private addMarkers(): void {
-    this.offers.forEach(offer => {
-      const marker = new L.Marker([offer.location.latitude, offer.location.longitude])
-        .bindTooltip(offer.title, {permanent: false, direction: "top", offset: [0, -20]})
-        .setIcon(this.activeCard && this.activeCard.id === offer.id ? this.currentCustomIcon : this.defaultCustomIcon)
+    this.offers.forEach((offer) => {
+      const marker = new L.Marker([
+        offer.location.latitude,
+        offer.location.longitude,
+      ])
+        .bindTooltip(offer.title, {
+          permanent: false,
+          direction: 'top',
+          offset: [0, -20],
+        })
+        .setIcon(
+          this.activeCard && this.activeCard.id === offer.id
+            ? this.currentCustomIcon
+            : this.defaultCustomIcon,
+        )
         .addTo(this.map);
       this.markers.push(marker);
-    })
+    });
   }
 
   private refreshMarkers(): void {
-    this.markers.forEach(marker => this.map.removeLayer(marker));
+    this.markers.forEach((marker) => this.map.removeLayer(marker));
     this.addMarkers();
   }
 }

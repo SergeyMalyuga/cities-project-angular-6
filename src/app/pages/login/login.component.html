@@ -21,7 +21,13 @@
     <div class="page__login-container container">
       <section class="login">
         <h1 class="login__title">Sign in</h1>
-        <form (ngSubmit)="onSubmit()" [formGroup]="loginForm" class="login__form form" action="#" method="post">
+        <form
+          (ngSubmit)="onSubmit()"
+          [formGroup]="loginForm"
+          class="login__form form"
+          action="#"
+          method="post"
+        >
           <div class="login__input-wrapper form__input-wrapper">
             <label for="email" class="visually-hidden">E-mail</label>
             <input
@@ -34,9 +40,9 @@
               required=""
             />
             @if (emailControl?.errors && emailControl?.touched) {
-              @if (emailControl?.errors?.['required']) {
+              @if (emailControl?.errors?.["required"]) {
                 <div class="error">Email обязателен для ввода</div>
-              } @else if (emailControl?.errors?.['email']) {
+              } @else if (emailControl?.errors?.["email"]) {
                 <div class="error">Не правильный формат email</div>
               }
             }
@@ -53,24 +59,30 @@
               required=""
             />
             @if (passwordControl?.errors && passwordControl?.touched) {
-              @if (passwordControl?.errors?.['required']) {
+              @if (passwordControl?.errors?.["required"]) {
                 <div class="error">Password обязателен для ввода</div>
-              } @else if (passwordControl?.errors?.['pattern']) {
+              } @else if (passwordControl?.errors?.["pattern"]) {
                 <div class="error">Не правильный формат password</div>
               }
             }
           </div>
-          <button class="login__submit form__submit button" type="submit" [disabled]="loginForm.invalid">
+          <button
+            class="login__submit form__submit button"
+            type="submit"
+            [disabled]="loginForm.invalid"
+          >
             Sign in
           </button>
         </form>
       </section>
       <section class="locations locations--login locations--current">
         <div class="locations__item">
-          <a class="locations__item-link"
-             (click)="changeCity(); $event.preventDefault()"
-             href="#">
-            <span>{{randomCity.name}}</span>
+          <a
+            class="locations__item-link"
+            (click)="changeCity(); $event.preventDefault()"
+            href="#"
+          >
+            <span>{{ randomCity.name }}</span>
           </a>
         </div>
       </section>

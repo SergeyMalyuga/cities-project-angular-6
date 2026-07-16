@@ -1,9 +1,16 @@
-import {ChangeDetectionStrategy, Component, EventEmitter, Input, Output, signal} from '@angular/core';
-import {NgClass} from '@angular/common';
-import {ToggleDirective} from '../../shared/directives/toggle.directive';
-import {HoverTrackerDirective} from '../../shared/directives/hover-tracker.directive';
-import {SortType} from '../../core/constants/const';
-import {AccessibilityClickDirective} from '../../shared/directives/accessibility-click.directive';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  EventEmitter,
+  Input,
+  Output,
+  signal,
+} from '@angular/core';
+import { NgClass } from '@angular/common';
+import { ToggleDirective } from '../../shared/directives/toggle.directive';
+import { HoverTrackerDirective } from '../../shared/directives/hover-tracker.directive';
+import { SortType } from '../../core/constants/const';
+import { AccessibilityClickDirective } from '../../shared/directives/accessibility-click.directive';
 
 @Component({
   selector: 'app-places-sorting-form',
@@ -11,13 +18,13 @@ import {AccessibilityClickDirective} from '../../shared/directives/accessibility
     NgClass,
     ToggleDirective,
     HoverTrackerDirective,
-    AccessibilityClickDirective
+    AccessibilityClickDirective,
   ],
   templateUrl: './places-sorting-form.component.html',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class PlacesSortingFormComponent {
-  @Input({required: true}) currentSortType!: SortType;
+  @Input({ required: true }) currentSortType!: SortType;
   @Output() clicked = new EventEmitter<SortType>();
 
   public isOpen = signal<boolean>(false);

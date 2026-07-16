@@ -1,6 +1,6 @@
-import {createAction, props} from '@ngrx/store';
-import {OfferPreview} from '../../../core/models/offers';
-import {HttpErrorResponse} from '@angular/common/http';
+import { createAction, props } from '@ngrx/store';
+import { OfferPreview } from '../../../core/models/offers';
+import { HttpErrorResponse } from '@angular/common/http';
 
 export const loadOffers = createAction('[Offer] Load Offers]');
 export const loadOffersSuccess = createAction(

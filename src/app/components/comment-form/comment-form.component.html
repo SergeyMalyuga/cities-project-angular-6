@@ -1,7 +1,11 @@
-<form (ngSubmit)="onSubmit()" [formGroup]="commentForm" class="reviews__form form" action="#" method="post">
-  <label class="reviews__label form__label" for="review"
-  >Your review</label
-  >
+<form
+  (ngSubmit)="onSubmit()"
+  [formGroup]="commentForm"
+  class="reviews__form form"
+  action="#"
+  method="post"
+>
+  <label class="reviews__label form__label" for="review">Your review</label>
   <div class="reviews__rating-form form__rating">
     <input
       formControlName="rating"
@@ -103,9 +107,8 @@
   <div class="reviews__button-wrapper">
     <p class="reviews__help">
       To submit review please make sure to set
-      <span class="reviews__star">rating</span> and describe your
-      stay with at least
-      <b class="reviews__text-amount">50 characters</b>.
+      <span class="reviews__star">rating</span> and describe your stay with at
+      least <b class="reviews__text-amount">50 characters</b>.
     </p>
     <button
       class="reviews__submit form__submit button"

@@ -1,8 +1,8 @@
-import {Pipe, PipeTransform} from '@angular/core';
-import {Comment} from '../../../core/models/comments';
+import { Pipe, PipeTransform } from '@angular/core';
+import { Comment } from '../../../core/models/comments';
 
 @Pipe({
-  name: 'sortByDate'
+  name: 'sortByDate',
 })
 export class SortByDatePipe implements PipeTransform {
   transform(comments: Comment[]): Comment[] {
@@ -17,7 +17,7 @@ export class SortByDatePipe implements PipeTransform {
       const validDataA = Number.isNaN(dataA) ? 0 : dataA;
       const validDataB = Number.isNaN(dataA) ? 0 : dataB;
 
-      return validDataB - validDataA
-    })
+      return validDataB - validDataA;
+    });
   }
 }

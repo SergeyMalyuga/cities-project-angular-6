@@ -1,15 +1,17 @@
 <div
-[ngClass]="{
-'page': true,
-'page--favorites-empty': isEmptyPage()
-}">
+  [ngClass]="{
+    page: true,
+    'page--favorites-empty': isEmptyPage(),
+  }"
+>
   <app-header />
   <main
-  [ngClass]="{
-  'page__main': true,
-  'page__main--favorites': true,
-  'page__main--favorites-empty': isEmptyPage()
-  }">
+    [ngClass]="{
+      page__main: true,
+      'page__main--favorites': true,
+      'page__main--favorites-empty': isEmptyPage(),
+    }"
+  >
     <div class="page__favorites-container container">
       @if (isEmptyPage()) {
         <section class="favorites favorites--empty">
@@ -28,16 +30,22 @@
             @for (city of CITIES; track city) {
               @if (isKeyOfOffersByCity(city) && offers()[city].length > 0) {
                 <li class="favorites__locations-items">
-                  <div class="favorites__locations locations locations--current">
+                  <div
+                    class="favorites__locations locations locations--current"
+                  >
                     <div class="locations__item">
                       <a class="locations__item-link" href="#">
-                        <span>{{city}}</span>
+                        <span>{{ city }}</span>
                       </a>
                     </div>
                   </div>
                   <div class="favorites__places">
                     @for (offer of offers()[city]; track offer.id) {
-                      <app-offer-card class="favorites__card" [offer]="offer" [isFavoritePage]="true"/>
+                      <app-offer-card
+                        class="favorites__card"
+                        [offer]="offer"
+                        [isFavoritePage]="true"
+                      />
                     }
                   </div>
                 </li>

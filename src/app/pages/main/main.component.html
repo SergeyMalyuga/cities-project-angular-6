@@ -1,8 +1,8 @@
 @if (isOffersLoading()) {
-  <app-loader/>
+  <app-loader />
 }
 <div class="page page--gray page--main">
-  <app-header/>
+  <app-header />
   <main class="page__main page__main--index">
     <h1 class="visually-hidden">Cities</h1>
     <div class="tabs">
@@ -31,18 +31,28 @@
         <section class="cities__places places">
           <h2 class="visually-hidden">Places</h2>
           <b class="places__found"
-          >{{ offers().length }} places to stay in {{ currentCity().name }}</b
+            >{{ offers().length }} places to stay in {{ currentCity().name }}</b
           >
-          <app-places-sorting-form [currentSortType]="currentSortType()" (clicked)="changeSortType($event)"/>
+          <app-places-sorting-form
+            [currentSortType]="currentSortType()"
+            (clicked)="changeSortType($event)"
+          />
           <div class="cities__places-list places__list tabs__content">
-            @for (offer of offers() | sortBy: currentSortType(); track offer.id) {
-              <app-offer-card [offer]="offer" [isHoverTrackerEnable]="true" (hovered)="changeActiveCard($event)"/>
+            @for (
+              offer of offers() | sortBy: currentSortType();
+              track offer.id
+            ) {
+              <app-offer-card
+                [offer]="offer"
+                [isHoverTrackerEnable]="true"
+                (hovered)="changeActiveCard($event)"
+              />
             }
           </div>
         </section>
         <div class="cities__right-section">
           <section class="cities__map map">
-            <app-map [offers]="offers()" [activeCard]="activeCard()"/>
+            <app-map [offers]="offers()" [activeCard]="activeCard()" />
           </section>
         </div>
       </div>

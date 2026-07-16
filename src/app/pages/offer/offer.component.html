@@ -1,15 +1,15 @@
 @if (offer() === null) {
-  <app-loader/>
+  <app-loader />
 }
 <div class="page">
-  <app-header/>
+  <app-header />
   <main class="page__main page__main--offer">
     <section class="offer">
       <div class="offer__gallery-container container">
         <div class="offer__gallery">
           @for (image of offer()?.images; track image) {
             <div class="offer__image-wrapper">
-              <img class="offer__image" src="{{image}}" alt="Photo studio"/>
+              <img class="offer__image" src="{{ image }}" alt="Photo studio" />
             </div>
           }
         </div>
@@ -25,14 +25,19 @@
             <h1 class="offer__name">
               {{ offer()?.title }}
             </h1>
-            <button (click)="toggleFavoriteStatus()"
-                    [ngClass]="{
-                    'offer__bookmark-button': true,
-                    'button': true,
-                    'offer__bookmark-button--active': isEnableActiveMark(offer(), authStatus())
-                    }"
-                    type="button"
-                    [disabled]="isToggleStatus()">
+            <button
+              (click)="toggleFavoriteStatus()"
+              [ngClass]="{
+                'offer__bookmark-button': true,
+                button: true,
+                'offer__bookmark-button--active': isEnableActiveMark(
+                  offer(),
+                  authStatus()
+                ),
+              }"
+              type="button"
+              [disabled]="isToggleStatus()"
+            >
               <svg class="offer__bookmark-icon" width="31" height="33">
                 <use xlink:href="#icon-bookmark"></use>
               </svg>
@@ -41,18 +46,24 @@
           </div>
           <div class="offer__rating rating">
             <div class="offer__stars rating__stars">
-              <span [style.width.%]="getRatingWidth(offer()?.rating ?? 0)"></span>
+              <span
+                [style.width.%]="getRatingWidth(offer()?.rating ?? 0)"
+              ></span>
               <span class="visually-hidden">Rating</span>
             </div>
-            <span class="offer__rating-value rating__value">{{ offer()?.rating }}</span>
+            <span class="offer__rating-value rating__value">{{
+              offer()?.rating
+            }}</span>
           </div>
           <ul class="offer__features">
-            <li class="offer__feature offer__feature--entire">{{ offer()?.type | titlecase }}</li>
-            <li
-              class="offer__feature offer__feature--bedrooms">{{ bedrooms() }} {{ bedrooms() > 1 ? 'Bedrooms' : 'Bedroom' }}
+            <li class="offer__feature offer__feature--entire">
+              {{ offer()?.type | titlecase }}
+            </li>
+            <li class="offer__feature offer__feature--bedrooms">
+              {{ bedrooms() }} {{ bedrooms() > 1 ? "Bedrooms" : "Bedroom" }}
             </li>
             <li class="offer__feature offer__feature--adults">
-              Max {{ maxAdults() }} {{ maxAdults() > 1 ? 'adults' : 'adult' }}
+              Max {{ maxAdults() }} {{ maxAdults() > 1 ? "adults" : "adult" }}
             </li>
           </ul>
           <div class="offer__price">
@@ -75,7 +86,7 @@
               >
                 <img
                   class="offer__avatar user__avatar"
-                  src="{{offer()?.host?.avatarUrl}}"
+                  src="{{ offer()?.host?.avatarUrl }}"
                   width="74"
                   height="74"
                   alt="Host avatar"
@@ -94,7 +105,8 @@
           </div>
           <section class="offer__reviews reviews">
             <h2 class="reviews__title">
-              Reviews &middot; <span class="reviews__amount">{{ comments().length }}</span>
+              Reviews &middot;
+              <span class="reviews__amount">{{ comments().length }}</span>
             </h2>
             <ul class="reviews__list">
               @for (comment of comments() | sortByDate; track comment.id) {
@@ -103,49 +115,68 @@
                     <div class="reviews__avatar-wrapper user__avatar-wrapper">
                       <img
                         class="reviews__avatar user__avatar"
-                        src="{{comment.user.avatarUrl}}"
+                        src="{{ comment.user.avatarUrl }}"
                         width="54"
                         height="54"
                         alt="Reviews avatar"
                       />
                     </div>
-                    <span class="reviews__user-name"> {{ comment.user.name }} </span>
+                    <span class="reviews__user-name">
+                      {{ comment.user.name }}
+                    </span>
                   </div>
                   <div class="reviews__info">
                     <div class="reviews__rating rating">
                       <div class="reviews__stars rating__stars">
-                        <span [style.width.%]="getRatingWidth(comment.rating)"></span>
+                        <span
+                          [style.width.%]="getRatingWidth(comment.rating)"
+                        ></span>
                         <span class="visually-hidden">Rating</span>
                       </div>
                     </div>
                     <p class="reviews__text">
                       {{ comment.comment }}
                     </p>
-                    <time class="reviews__time" [attr.datetime]="comment.date | date: 'YYYY-MM-dd'"
-                    >{{ comment.date | date: 'MMMM YYYY' }}
-                    </time
-                    >
+                    <time
+                      class="reviews__time"
+                      [attr.datetime]="comment.date | date: 'YYYY-MM-dd'"
+                      >{{ comment.date | date: "MMMM YYYY" }}
+                    </time>
                   </div>
                 </li>
               }
             </ul>
             @if (isAuth(authStatus())) {
-              <app-comment-form [offerId]="offerId()" (commentAdded)="refreshComments()"/>
+              <app-comment-form
+                [offerId]="offerId()"
+                (commentAdded)="refreshComments()"
+              />
             }
           </section>
         </div>
       </div>
       <section class="offer__map map">
-        <app-map [offers]="nearbyOffers() | slice: 0: QUANTITY_FIRST_OFFERS" [activeCard]="null"/>
+        <app-map
+          [offers]="nearbyOffers() | slice: 0 : QUANTITY_FIRST_OFFERS"
+          [activeCard]="null"
+        />
       </section>
     </section>
     <div class="container">
       <section class="near-places places">
         <h2 class="near-places__title">Other places in the neighbourhood</h2>
         <div class="near-places__list places__list">
-          @for (nearbyOffer of nearbyOffers() | slice: 0 : QUANTITY_FIRST_OFFERS; track nearbyOffer.id) {
-            <app-offer-card appScrollUp [enable]="true" [offer]="nearbyOffer" (toggled)="refreshNearbyOffers()"
-                            [isDisabled]="isNearbyOffersLoading()"/>
+          @for (
+            nearbyOffer of nearbyOffers() | slice: 0 : QUANTITY_FIRST_OFFERS;
+            track nearbyOffer.id
+          ) {
+            <app-offer-card
+              appScrollUp
+              [enable]="true"
+              [offer]="nearbyOffer"
+              (toggled)="refreshNearbyOffers()"
+              [isDisabled]="isNearbyOffersLoading()"
+            />
           }
         </div>
       </section>

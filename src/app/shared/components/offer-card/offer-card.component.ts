@@ -1,18 +1,26 @@
-import {ChangeDetectionStrategy, Component, DestroyRef, EventEmitter, inject, Input, Output} from '@angular/core';
-import {OfferPreview} from '../../../core/models/offers';
-import {getRatingWidth} from '../../../core/utils/rating-width';
-import {NgClass, TitleCasePipe} from '@angular/common';
-import {HoverTrackerDirective} from '../../directives/hover-tracker.directive';
-import {AppState} from '../../../core/models/app.state';
-import {Store} from '@ngrx/store';
-import {selectAuthStatus} from '../../../store/user/selectors/user.selectors';
-import {AppRoute} from '../../../core/constants/const';
-import {OfferService} from '../../../core/services/offer.service';
-import {selectIsFavoriteOffersLoading} from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
-import {RouterLink} from '@angular/router';
-import {isEnableActiveMark} from '../../../core/utils/enable-active-mark';
-import {first, tap} from 'rxjs';
-import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  DestroyRef,
+  EventEmitter,
+  inject,
+  Input,
+  Output,
+} from '@angular/core';
+import { OfferPreview } from '../../../core/models/offers';
+import { getRatingWidth } from '../../../core/utils/rating-width';
+import { NgClass, TitleCasePipe } from '@angular/common';
+import { HoverTrackerDirective } from '../../directives/hover-tracker.directive';
+import { AppState } from '../../../core/models/app.state';
+import { Store } from '@ngrx/store';
+import { selectAuthStatus } from '../../../store/user/selectors/user.selectors';
+import { AppRoute } from '../../../core/constants/const';
+import { OfferService } from '../../../core/services/offer.service';
+import { selectIsFavoriteOffersLoading } from '../../../store/favorite-offer/selectors/favorite-offers.selectors';
+import { RouterLink } from '@angular/router';
+import { isEnableActiveMark } from '../../../core/utils/enable-active-mark';
+import { first, tap } from 'rxjs';
+import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-offer-card',
@@ -21,7 +29,7 @@ import {takeUntilDestroyed} from '@angular/core/rxjs-interop';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class OfferCardComponent {
-  @Input({required: true}) offer!: OfferPreview;
+  @Input({ required: true }) offer!: OfferPreview;
   @Input() isHoverTrackerEnable = false;
   @Input() isDisabled: boolean | null = null;
   @Input() isFavoritePage = false;
@@ -36,22 +44,28 @@ export class OfferCardComponent {
   protected readonly isEnableActiveMark = isEnableActiveMark;
 
   public authStatus = this.store.selectSignal(selectAuthStatus);
-  public isFavoriteOffersIsLoading = this.store.selectSignal(selectIsFavoriteOffersLoading);
+  public isFavoriteOffersIsLoading = this.store.selectSignal(
+    selectIsFavoriteOffersLoading,
+  );
 
   protected readonly getRatingWidth = getRatingWidth;
 
   public onHovered(isHover: boolean) {
     if (isHover) {
-      this.hovered.emit(this.offer)
+      this.hovered.emit(this.offer);
     } else {
-      this.hovered.emit(null)
+      this.hovered.emit(null);
     }
   }
 
   public toggleFavoriteStatus() {
-    this.offerService.toggleFavorite(this.offer.id, !this.offer.isFavorite)
-      .pipe(first(success => success !== null),
+    this.offerService
+      .toggleFavorite(this.offer.id, !this.offer.isFavorite)
+      .pipe(
+        first((success) => success !== null),
         tap(() => this.toggled.emit()),
-        takeUntilDestroyed(this.destroyRef)).subscribe();
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe();
   }
 }

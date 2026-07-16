@@ -1,6 +1,6 @@
-import {ComponentFixture, TestBed} from '@angular/core/testing';
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import {PlacesSortingFormComponent} from './places-sorting-form.component';
+import { PlacesSortingFormComponent } from './places-sorting-form.component';
 
 describe('PlacesSortingFormComponent', () => {
   let component: PlacesSortingFormComponent;
@@ -8,9 +8,8 @@ describe('PlacesSortingFormComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [PlacesSortingFormComponent]
-    })
-    .compileComponents();
+      imports: [PlacesSortingFormComponent],
+    }).compileComponents();
 
     fixture = TestBed.createComponent(PlacesSortingFormComponent);
     component = fixture.componentInstance;
