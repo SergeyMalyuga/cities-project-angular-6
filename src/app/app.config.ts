@@ -2,11 +2,7 @@ import {ApplicationConfig, provideZoneChangeDetection} from '@angular/core';
 import {provideRouter} from '@angular/router';
 
 import {routes} from './app.routes';
-import {
-  HTTP_INTERCEPTORS,
-  provideHttpClient,
-  withInterceptorsFromDi,
-} from '@angular/common/http';
+import {HTTP_INTERCEPTORS, provideHttpClient, withInterceptorsFromDi,} from '@angular/common/http';
 import {provideStore} from '@ngrx/store';
 import {appReducer} from './store/app/app.reducer';
 import {provideEffects} from '@ngrx/effects';

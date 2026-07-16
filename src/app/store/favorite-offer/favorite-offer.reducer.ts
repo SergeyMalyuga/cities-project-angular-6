@@ -5,7 +5,10 @@ import {createReducer, on} from '@ngrx/store';
 import {
   loadFavoriteOffers,
   loadFavoriteOffersFailure,
-  loadFavoriteOffersSuccess, toggleFavoriteOffer, toggleFavoriteOfferFailure, toggleFavoriteOfferSuccess
+  loadFavoriteOffersSuccess,
+  toggleFavoriteOffer,
+  toggleFavoriteOfferFailure,
+  toggleFavoriteOfferSuccess
 } from './actions/favorite-offer.actions';
 
 export const favoriteOfferAdapter = createEntityAdapter<OfferPreview>();
