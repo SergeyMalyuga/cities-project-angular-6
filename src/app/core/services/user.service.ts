@@ -26,7 +26,7 @@ export class UserService {
 
   public logout(): Observable<void> {
     return this.http
-      .delete<void>(`${BASE_URL}/${APIRoute.LOGIN}`)
+      .delete<void>(`${BASE_URL}/${APIRoute.LOGOUT}`)
       .pipe(...getDefaultHttpPipes<void>());
   }
 }
