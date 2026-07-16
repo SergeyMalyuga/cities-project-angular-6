@@ -1,3 +1,6 @@
+@if (offer() === null) {
+  <app-loader/>
+}
 <div class="page">
   <app-header/>
   <main class="page__main page__main--offer">
@@ -141,7 +144,8 @@
         <h2 class="near-places__title">Other places in the neighbourhood</h2>
         <div class="near-places__list places__list">
           @for (nearbyOffer of nearbyOffers() | slice: 0 : QUANTITY_FIRST_OFFERS; track nearbyOffer.id) {
-            <app-offer-card appScrollUp [enable]="true" [offer]="nearbyOffer" (toggled)="refreshNearbyOffers()" [isDisabled]="isNearbyOffersLoading()"/>
+            <app-offer-card appScrollUp [enable]="true" [offer]="nearbyOffer" (toggled)="refreshNearbyOffers()"
+                            [isDisabled]="isNearbyOffersLoading()"/>
           }
         </div>
       </section>

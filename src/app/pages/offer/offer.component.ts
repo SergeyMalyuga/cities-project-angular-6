@@ -21,10 +21,11 @@ import {isAuth} from '../../core/utils/auth-status';
 import {MapComponent} from '../../shared/components/map/map.component';
 import {OfferCardComponent} from '../../shared/components/offer-card/offer-card.component';
 import {ScrollUpDirective} from '../../shared/directives/scroll-up.directive';
+import {LoaderComponent} from '../../shared/components/loader/loader.component';
 
 @Component({
   selector: 'app-offer',
-  imports: [HeaderComponent, NgClass, TitleCasePipe, DatePipe, CommentFormComponent, SortByDatePipe, SortByDatePipe, MapComponent, SlicePipe, OfferCardComponent, ScrollUpDirective],
+  imports: [HeaderComponent, NgClass, TitleCasePipe, DatePipe, CommentFormComponent, SortByDatePipe, SortByDatePipe, MapComponent, SlicePipe, OfferCardComponent, ScrollUpDirective, LoaderComponent],
   templateUrl: './offer.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
